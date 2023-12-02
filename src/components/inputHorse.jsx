@@ -91,6 +91,9 @@ export function InputResult(){
 };
 
 export function InputHorse({place, defaultName, setName, defaultMare, setMare, defaultRating, setRating}){
+    
+    const [color, setColor] = useState("black")
+    
     return(
         <div className = "inputHorse" style={styles.inputHorse}>
             <div className="place">
@@ -98,16 +101,21 @@ export function InputHorse({place, defaultName, setName, defaultMare, setMare, d
             </div>
             <input 
                 type="text"
+                className="horseName"
                 placeholder="馬名"
                 value={defaultName}
                 onChange={(e) => setName(e.target.value)}
+                style = {{color:color}}
             />
             <div>
                 <input 
                     type="checkbox"
                     id="isMare"
                     value={defaultMare}
-                    onChange={(e) => setMare(e.target.checked)}
+                    onChange={(e) => {
+                        setMare(e.target.checked)
+                        setColor(e.target.checked?"red":"black")
+                    }}
                 />
                 <label>牝馬 </label>
             </div>
@@ -116,6 +124,9 @@ export function InputHorse({place, defaultName, setName, defaultMare, setMare, d
                 placeholder="プレレーティング"
                 value={defaultRating}
                 onChange={(e) => setRating(e.target.value)}
+                style = {
+                    {color:color}
+                }
             />
         </div>
     );
