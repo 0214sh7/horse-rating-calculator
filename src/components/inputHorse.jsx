@@ -1,38 +1,11 @@
 import React, { useState } from "react";
 
-export function InputResult(){
-
-    const [allowance, setAllowance] = useState(4)
-    const [course, setCourse] = useState(1.5)
-
-    const [horseName1, setHorseName1] = useState("")
-    const [horseName2, setHorseName2] = useState("")
-    const [horseName3, setHorseName3] = useState("")
-    const [horseName4, setHorseName4] = useState("")
-    const [horseName5, setHorseName5] = useState("")
-
-    const [isMare1, setIsMare1] = useState(false)
-    const [isMare2, setIsMare2] = useState(false)
-    const [isMare3, setIsMare3] = useState(false)
-    const [isMare4, setIsMare4] = useState(false)
-    const [isMare5, setIsMare5] = useState(false)
-
-    const [horseRating1, setHorseRating1] = useState("")
-    const [horseRating2, setHorseRating2] = useState("")
-    const [horseRating3, setHorseRating3] = useState("")
-    const [horseRating4, setHorseRating4] = useState("")
-    const [horseRating5, setHorseRating5] = useState("")
-
-    const [margin1, setMargin1] = useState(0)
-    const [margin2, setMargin2] = useState(0)
-    const [margin3, setMargin3] = useState(0)
-    const [margin4, setMargin4] = useState(0)
-
+export function InputResult({size, setSize, allowance, setAllowance, course, setCourse, horses, setHorses}){
     return(
         <div className="inputResult" style={styles.inputResult}>
         
             <div style={{display: "flex", flexDirection: "row"}}>
-                <InputCourse defaultValue = {course} setCourse={setCourse}/>
+                <InputCourse course = {course} setCourse={setCourse}/>
                 <div>
                     牝馬斤量差 
                     <input 
@@ -46,39 +19,22 @@ export function InputResult(){
             
             <div className = "inputArrival" style={styles.inputArrival}>
                 <div className = "inputRank" style={styles.inputRank}>
-                    <InputHorse place = '1' defaultName = {horseName1} setName = {setHorseName1} defaultMare = {isMare1} setMare = {setIsMare1} defaultRating = {horseRating1} setRating = {setHorseRating1}/>
-                    <InputHorse place = '2' defaultName = {horseName2} setName = {setHorseName2} defaultMare = {isMare2} setMare = {setIsMare2} defaultRating = {horseRating2} setRating = {setHorseRating2}/>
-                    <InputHorse place = '3' defaultName = {horseName3} setName = {setHorseName3} defaultMare = {isMare3} setMare = {setIsMare3} defaultRating = {horseRating3} setRating = {setHorseRating3}/>
-                    <InputHorse place = '4' defaultName = {horseName4} setName = {setHorseName4} defaultMare = {isMare4} setMare = {setIsMare4} defaultRating = {horseRating4} setRating = {setHorseRating4}/>
-                    <InputHorse place = '5' defaultName = {horseName5} setName = {setHorseName5} defaultMare = {isMare5} setMare = {setIsMare5} defaultRating = {horseRating5} setRating = {setHorseRating5}/>
+                    <InputHorse horse = {horses[0]} setHorse = {setHorses[0]}/>
+                    <InputHorse horse = {horses[1]} setHorse = {setHorses[1]}/>
+                    <InputHorse horse = {horses[2]} setHorse = {setHorses[2]}/>
+                    <InputHorse horse = {horses[3]} setHorse = {setHorses[3]}/>
+                    <InputHorse horse = {horses[4]} setHorse = {setHorses[4]}/>
                 </div>
                 <div className = "inputMargin" style={{flexDirection: 'column', padding: '35px 0px 0px 0px',}}>
-                    <InputMargin place = '1' defaultMargin = {margin1} setMargin = {setMargin1}/>
-                    <InputMargin place = '2' defaultMargin = {margin2} setMargin = {setMargin2}/>
-                    <InputMargin place = '3' defaultMargin = {margin3} setMargin = {setMargin3}/>
-                    <InputMargin place = '4' defaultMargin = {margin4} setMargin = {setMargin4}/>
+                    <InputMargin horse = {horses[1]} setHorse={setHorses[1]}/>
+                    <InputMargin horse = {horses[2]} setHorse={setHorses[2]}/>
+                    <InputMargin horse = {horses[3]} setHorse={setHorses[3]}/>
+                    <InputMargin horse = {horses[4]} setHorse={setHorses[4]}/>
                     <button onClick={ () => {
+                        console.log(size)
                         console.log(allowance)
                         console.log(course)
-                        console.log(horseName1)
-                        console.log(horseName2)
-                        console.log(horseName3)
-                        console.log(horseName4)
-                        console.log(horseName5)
-                        console.log(isMare1)
-                        console.log(isMare2)
-                        console.log(isMare3)
-                        console.log(isMare4)
-                        console.log(isMare5)
-                        console.log(horseRating1)
-                        console.log(horseRating2)
-                        console.log(horseRating3)
-                        console.log(horseRating4)
-                        console.log(horseRating5)
-                        console.log(margin1)
-                        console.log(margin2)
-                        console.log(margin3)
-                        console.log(margin4)
+                        console.log(horses)
                     }}>
                         計算
                     </button>
@@ -90,30 +46,55 @@ export function InputResult(){
     );
 };
 
-export function InputHorse({place, defaultName, setName, defaultMare, setMare, defaultRating, setRating}){
+export function InputCourse({course, setCourse}){
+
+    return(
+        <div className = "inputCourse" style={styles.inputCourse}>
+            <label htmlFor="selectCourse"> コース </label>
+
+            <select id="selectCourse" key={course} defaultValue={course}
+            onChange={(e) => setCourse(e.target.value)}>
+                <option value='tk'>芝 1000m</option>
+                <option value='ts'>芝 S(1200m～1300m)</option>
+                <option value='tm'>芝 M(1301m～1899m)</option>
+                <option value='ti'>芝 I(1900m～2100m)</option>
+                <option value='tl'>芝 L(2101m～2700m)</option>
+                <option value='te'>芝 E(2701m～)</option>
+                <option value='dk'>ダ 1000m</option>
+                <option value='ds'>ダ S(1200m～1599m)</option>
+                <option value='dm'>ダ M(1600m～1899m)</option>
+                <option value='di'>ダ I(1900m～2100m)</option>
+                <option value='dl'>ダ L(2101m～)</option>
+            </select>
+        </div>
+
+    );
+};
+
+export function InputHorse({horse,setHorse}){
     
     const [color, setColor] = useState("black")
     
     return(
         <div className = "inputHorse" style={styles.inputHorse}>
             <div className="place">
-                {place}着
+                {horse.id}着
             </div>
             <input 
                 type="text"
                 className="horseName"
                 placeholder="馬名"
-                value={defaultName}
-                onChange={(e) => setName(e.target.value)}
+                value={horse.name}
+                onChange={(e) => setHorse({...horse, name: e.target.value})}
                 style = {{color:color}}
             />
             <div>
                 <input 
                     type="checkbox"
                     id="isMare"
-                    value={defaultMare}
+                    value={horse.isMare}
                     onChange={(e) => {
-                        setMare(e.target.checked)
+                        setHorse({...horse, isMare: e.target.checked})
                         setColor(e.target.checked?"red":"black")
                     }}
                 />
@@ -122,8 +103,8 @@ export function InputHorse({place, defaultName, setName, defaultMare, setMare, d
             <input
                 type="text"
                 placeholder="プレレーティング"
-                value={defaultRating}
-                onChange={(e) => setRating(e.target.value)}
+                value={horse.prerating}
+                onChange={(e) => setHorse({...horse, prerating: e.target.value})}
                 style = {
                     {color:color}
                 }
@@ -132,15 +113,15 @@ export function InputHorse({place, defaultName, setName, defaultMare, setMare, d
     );
 };
 
-export function InputMargin({place, defaultMargin, setMargin}){
+export function InputMargin({horse,setHorse}){
     return(
         <div className = "inputMargin" style={styles.inputMargin}>
-            <label htmlFor="selectMargin"> {Number(place)}-{Number(place)+1} 着差 </label>
+            <label htmlFor="selectMargin"> {Number(horse.id)-1}-{Number(horse.id)} 着差 </label>
 
             <select 
                 id="selectMargin"
-                value={defaultMargin}
-                onChange={(e) => setMargin(e.target.value)}
+                value={horse.Margin}
+                onChange={(e) => setHorse({...horse, margin: e.target.value})}
             >
                 <option value='0'>同着</option>
                 <option value='0.08333'>ハナ</option>
@@ -170,29 +151,7 @@ export function InputMargin({place, defaultMargin, setMargin}){
     );
 };
 
-export function InputCourse({defaultValue, setCourse}){
-    return(
-        <div className = "inputCourse" style={styles.inputCourse}>
-            <label htmlFor="selectCourse"> コース </label>
 
-            <select id="selectCourse" key={defaultValue} defaultValue={defaultValue}
-            onChange={(e) => setCourse(e.target.value)}>
-                <option value='3'>芝 1000m</option>
-                <option value='2.5'>芝 S(1200m～1300m)</option>
-                <option value='2'>芝 M(1301m～1899m)</option>
-                <option value='1.75'>芝 I(1900m～2100m)</option>
-                <option value='1.5'>芝 L(2101m～2700m)</option>
-                <option value='1'>芝 E(2701m～)</option>
-                <option value='3.0'>ダ 1000m</option>
-                <option value='2.50'>ダ S(1200m～1599m)</option>
-                <option value='2.0'>ダ M(1600m～1899m)</option>
-                <option value='1.50'>ダ I(1900m～2100m)</option>
-                <option value='1.0'>ダ L(2101m～)</option>
-            </select>
-        </div>
-
-    );
-};
 
 const styles = {
     inputResult: {
