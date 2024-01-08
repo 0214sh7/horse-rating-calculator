@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export function InputResult({size, setSize, allowance, setAllowance, course, setCourse, horses, setHorses}){
+export function InputResult({size, setSize, allowance, setAllowance, course, setCourse, horses, setHorses, calculation}){
     return(
         <div className="inputResult" style={styles.inputResult}>
         
@@ -31,10 +31,7 @@ export function InputResult({size, setSize, allowance, setAllowance, course, set
                     <InputMargin horse = {horses[3]} setHorse={setHorses[3]}/>
                     <InputMargin horse = {horses[4]} setHorse={setHorses[4]}/>
                     <button onClick={ () => {
-                        console.log(size)
-                        console.log(allowance)
-                        console.log(course)
-                        console.log(horses)
+                        calculation()
                     }}>
                         計算
                     </button>

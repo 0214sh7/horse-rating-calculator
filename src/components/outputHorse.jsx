@@ -1,76 +1,72 @@
-export function ShowData({data}){
+export function ShowData({data,color}){
     return(
-        <div className="ShowData" style={styles.showData}>
+        <div className="ShowData" style={{...styles.showData, color:color}}>
             {data}
         </div>
     );
 };
 
-export function OutputResult({size, setSize, allowance, setAllowance, course, setCourse, horses, setHorses}){
+export function OutputResult({size, horses, rating}){
+
     return(
         <div className="outputResult" style={styles.outputResult}>
             <div>
                 レーティング
             </div>
-            <table className = "outputRating" style={styles.outputRating}>
-                <tr>
-                    <th>名前</th>
-                    <th>1着基準</th>
-                    <th>2着基準</th>
-                    <th>3着基準</th>
-                    <th>4着基準</th>
-                    <th>5着基準</th>
-                </tr>
-                <tr>
-                    <td> <OutputName horse = {horses[0]}/> </td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td> <OutputName horse = {horses[1]}/> </td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td> <OutputName horse = {horses[2]}/> </td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td> <OutputName horse = {horses[3]}/> </td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td> <OutputName horse = {horses[4]}/> </td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                </tr>
+            <table className = "outputTable" style={styles.outputTable}>
+                <thead>
+                    <tr>
+                        <th>名前</th>
+                        <th>1着基準</th>
+                        <th>2着基準</th>
+                        <th>3着基準</th>
+                        <th>4着基準</th>
+                        <th>5着基準</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> <OutputName horse = {horses[0]}/> </td>
+                        <td> <OutputRating horse = {horses[0]} rating={rating[0][0]}/> </td>
+                        <td> <OutputRating horse = {horses[0]} rating={rating[0][1]}/> </td>
+                        <td> <OutputRating horse = {horses[0]} rating={rating[0][2]}/> </td>
+                        <td> <OutputRating horse = {horses[0]} rating={rating[0][3]}/> </td>
+                        <td> <OutputRating horse = {horses[0]} rating={rating[0][4]}/> </td>
+                    </tr>
+                    <tr>
+                        <td> <OutputName horse = {horses[1]}/> </td>
+                        <td> <OutputRating horse = {horses[1]} rating={rating[1][0]}/> </td>
+                        <td> <OutputRating horse = {horses[1]} rating={rating[1][1]}/> </td>
+                        <td> <OutputRating horse = {horses[1]} rating={rating[1][2]}/> </td>
+                        <td> <OutputRating horse = {horses[1]} rating={rating[1][3]}/> </td>
+                        <td> <OutputRating horse = {horses[1]} rating={rating[1][4]}/> </td>
+                    </tr>
+                    <tr>
+                        <td> <OutputName horse = {horses[2]}/> </td>
+                        <td> <OutputRating horse = {horses[2]} rating={rating[2][0]}/> </td>
+                        <td> <OutputRating horse = {horses[2]} rating={rating[2][1]}/> </td>
+                        <td> <OutputRating horse = {horses[2]} rating={rating[2][2]}/> </td>
+                        <td> <OutputRating horse = {horses[2]} rating={rating[2][3]}/> </td>
+                        <td> <OutputRating horse = {horses[2]} rating={rating[2][4]}/> </td>
+                    </tr>
+                    <tr>
+                        <td> <OutputName horse = {horses[3]}/> </td>
+                        <td> <OutputRating horse = {horses[3]} rating={rating[3][0]}/> </td>
+                        <td> <OutputRating horse = {horses[3]} rating={rating[3][1]}/> </td>
+                        <td> <OutputRating horse = {horses[3]} rating={rating[3][2]}/> </td>
+                        <td> <OutputRating horse = {horses[3]} rating={rating[3][3]}/> </td>
+                        <td> <OutputRating horse = {horses[3]} rating={rating[3][4]}/> </td>
+                    </tr>
+                    <tr>
+                        <td> <OutputName horse = {horses[4]}/> </td>
+                        <td> <OutputRating horse = {horses[4]} rating={rating[4][0]}/> </td>
+                        <td> <OutputRating horse = {horses[4]} rating={rating[4][1]}/> </td>
+                        <td> <OutputRating horse = {horses[4]} rating={rating[4][2]}/> </td>
+                        <td> <OutputRating horse = {horses[4]} rating={rating[4][3]}/> </td>
+                        <td> <OutputRating horse = {horses[4]} rating={rating[4][4]}/> </td>
+                    </tr>
+                </tbody>
             </table>
-            {/* <div className = "outputRating" style={styles.outputRating}>
-                <div style={{display: "flex", flexDirection: "column"}}>
-                    <OutputName place = '1'/>
-                    <OutputName place = '2'/>
-                    <OutputName place = '3'/>
-                    <OutputName place = '4'/>
-                    <OutputName place = '5'/>
-                </div>
-            </div> */}
         </div>
         
     );
@@ -82,9 +78,16 @@ export function OutputName({horse}){
             <div className="place">
                 {horse.id}着
             </div>
-            {/* <input type="text" placeholder="馬名"/> */}
-            
-            <ShowData data={"メイショウフメイ "+horse.id}/>
+            <ShowData data={horse.name===""?"(入力なし)":horse.name} color = {(horse.isMare?"red":"black")}/>
+        </div>
+    );
+};
+
+
+export function OutputRating({horse,rating}){
+    return(
+        <div style = {{color:(horse.isMare?"red":"black")}}>
+            {rating}
         </div>
     );
 };
@@ -100,11 +103,9 @@ const styles = {
         flexDirection: 'row',
         backgroundColor: '#cff',
     },
-    outputRating: {
-        // display: 'flex',
-        // flexDirection: 'row',
-        // padding: '0px 0px 0px 0px',
-        // backgroundColor: '#fcf',
+    outputTable: {
+        textAlign: 'center',
+        backgroundColor: '#fcf',
     },
     outputName: {
         display: 'flex',
