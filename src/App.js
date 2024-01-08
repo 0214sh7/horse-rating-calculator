@@ -3,6 +3,7 @@ import { OutputResult } from './components/outputHorse';
 import React, { useState } from "react";
 import './App.css';
 
+// TODO: improve styles
 // TODO: handle any size
 // TODO: introduce MUI
 

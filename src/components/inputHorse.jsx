@@ -121,9 +121,9 @@ export function InputMargin({horse,setHorse}){
                 onChange={(e) => setHorse({...horse, margin: e.target.value})}
             >
                 <option value='0'>同着</option>
-                <option value='0.08333'>ハナ</option>
-                <option value='0.16667'>アタマ</option>
-                <option value='0.33333'>クビ</option>
+                <option value='0.06125'>ハナ</option>
+                <option value='0.125'>アタマ</option>
+                <option value='0.25'>クビ</option>
                 <option value='0.5'>1/2</option>
                 <option value='0.75'>3/4</option>
                 <option value='1'>1</option>
