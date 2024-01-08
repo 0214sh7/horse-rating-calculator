@@ -3,6 +3,8 @@ import { OutputResult } from './components/outputHorse';
 import React, { useState } from "react";
 import './App.css';
 
+// TODO: introduce MUI
+
 function App() {
 
   const initialSize = 5
@@ -38,7 +40,17 @@ function App() {
           setHorse1,setHorse2,setHorse3,setHorse4,setHorse5
         ]}
       />
-      <OutputResult/>
+      <OutputResult
+        size = {size} setSize = {setSize}
+        allowance = {allowance} setAllowance = {setAllowance}
+        course = {course} setCourse = {setCourse}
+        horses = {[
+          horse1,horse2,horse3,horse4,horse5
+        ]} 
+        setHorses = {[
+          setHorse1,setHorse2,setHorse3,setHorse4,setHorse5
+        ]}
+      />
     </div>
   );
 }

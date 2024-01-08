@@ -6,13 +6,63 @@ export function ShowData({data}){
     );
 };
 
-export function OutputResult(){
+export function OutputResult({size, setSize, allowance, setAllowance, course, setCourse, horses, setHorses}){
     return(
         <div className="outputResult" style={styles.outputResult}>
             <div>
                 レーティング
             </div>
-            <div className = "outputRating" style={styles.outputRating}>
+            <table className = "outputRating" style={styles.outputRating}>
+                <tr>
+                    <th>名前</th>
+                    <th>1着基準</th>
+                    <th>2着基準</th>
+                    <th>3着基準</th>
+                    <th>4着基準</th>
+                    <th>5着基準</th>
+                </tr>
+                <tr>
+                    <td> <OutputName horse = {horses[0]}/> </td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td> <OutputName horse = {horses[1]}/> </td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td> <OutputName horse = {horses[2]}/> </td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td> <OutputName horse = {horses[3]}/> </td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td> <OutputName horse = {horses[4]}/> </td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                </tr>
+            </table>
+            {/* <div className = "outputRating" style={styles.outputRating}>
                 <div style={{display: "flex", flexDirection: "column"}}>
                     <OutputName place = '1'/>
                     <OutputName place = '2'/>
@@ -20,21 +70,21 @@ export function OutputResult(){
                     <OutputName place = '4'/>
                     <OutputName place = '5'/>
                 </div>
-            </div>
+            </div> */}
         </div>
         
     );
 };
 
-export function OutputName({place}){
+export function OutputName({horse}){
     return(
         <div className = "outputName" style={styles.outputName}>
             <div className="place">
-                {place}着
+                {horse.id}着
             </div>
             {/* <input type="text" placeholder="馬名"/> */}
             
-            <ShowData data={"メイショウフメイ "+place}/>
+            <ShowData data={"メイショウフメイ "+horse.id}/>
         </div>
     );
 };
@@ -51,10 +101,10 @@ const styles = {
         backgroundColor: '#cff',
     },
     outputRating: {
-        display: 'flex',
-        flexDirection: 'row',
-        padding: '0px 0px 0px 0px',
-        backgroundColor: '#fcf',
+        // display: 'flex',
+        // flexDirection: 'row',
+        // padding: '0px 0px 0px 0px',
+        // backgroundColor: '#fcf',
     },
     outputName: {
         display: 'flex',
