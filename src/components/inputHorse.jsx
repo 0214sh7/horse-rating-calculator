@@ -70,8 +70,6 @@ export function InputCourse({course, setCourse}){
 
 export function InputHorse({horse,setHorse}){
     
-    const [color, setColor] = useState("black")
-    
     return(
         <div className = "inputHorse" style={styles.inputHorse}>
             <div className="place">
@@ -83,16 +81,16 @@ export function InputHorse({horse,setHorse}){
                 placeholder="馬名"
                 value={horse.name}
                 onChange={(e) => setHorse({...horse, name: e.target.value})}
-                style = {{color:color}}
+                style = {{color:(horse.isMare?"red":"black")}}
             />
             <div>
                 <input 
                     type="checkbox"
                     id="isMare"
-                    value={horse.isMare}
+                    checked ={horse.isMare}
                     onChange={(e) => {
                         setHorse({...horse, isMare: e.target.checked})
-                        setColor(e.target.checked?"red":"black")
+                        // setColor(e.target.checked?"red":"black")
                     }}
                 />
                 <label>牝馬 </label>
@@ -102,9 +100,7 @@ export function InputHorse({horse,setHorse}){
                 placeholder="プレレーティング"
                 value={horse.prerating}
                 onChange={(e) => setHorse({...horse, prerating: e.target.value})}
-                style = {
-                    {color:color}
-                }
+                style = {{color:(horse.isMare?"red":"black")}}
             />
         </div>
     );
@@ -117,9 +113,10 @@ export function InputMargin({horse,setHorse}){
 
             <select 
                 id="selectMargin"
-                value={horse.Margin}
+                value={horse.margin}
                 onChange={(e) => setHorse({...horse, margin: e.target.value})}
             >
+                <option value='-0.001'>-</option>
                 <option value='0'>同着</option>
                 <option value='0.06125'>ハナ</option>
                 <option value='0.125'>アタマ</option>

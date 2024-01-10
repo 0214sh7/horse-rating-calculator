@@ -1,8 +1,10 @@
 import { InputResult } from './components/inputHorse';
 import { OutputResult } from './components/outputHorse';
+import { InputSample } from './components/sample';
 import React, { useState } from "react";
 import './App.css';
 
+// TODO: handle invalid inputs
 // TODO: improve styles
 // TODO: handle any size
 // TODO: introduce MUI
@@ -33,7 +35,7 @@ function App() {
     name: '',
     isMare: false,
     prerating: '',
-    margin: '0'
+    margin: '-0.001'
   }
 
   const [inputHorse1, setInputHorse1] = useState({ ...initialHorse, id: 1 });
@@ -57,8 +59,6 @@ function App() {
   }
 
   const [newRating, setNewRating] = useState(initialRating);
-
-  
 
   const calculation = () => {
 
@@ -95,7 +95,8 @@ function App() {
 
     for(i=0;i<size;i++){
       for(j=0;j<size;j++){
-        rating[i][j] = Math.floor(rating[i][j] + 0.5 + 0.0001)
+        // 0.65以上を切り上げる
+        rating[i][j] = Math.floor(rating[i][j] + 1.0 - 0.65 + 0.0001)
         rating[i][j] = String(rating[i][j]) + (i===0?"+α":"")
       }
     }
@@ -122,6 +123,14 @@ function App() {
           setInputHorse1,setInputHorse2,setInputHorse3,setInputHorse4,setInputHorse5
         ]}
         calculation={calculation}
+      />
+      <InputSample 
+        setSize = {setSize}
+        setCourse = {setCourse}
+        setAllowance = {setAllowance}
+        setHorses = {[
+          setInputHorse1,setInputHorse2,setInputHorse3,setInputHorse4,setInputHorse5
+        ]}
       />
       <OutputResult
         size = {size}
