@@ -1,5 +1,5 @@
 import { InputResult } from './components/inputHorse';
-import { OutputResult } from './components/outputHorse';
+import { OutputResult, OutputError } from './components/outputHorse';
 import { InputSample } from './components/sample';
 import React, { useState } from "react";
 import './App.css';
@@ -59,8 +59,41 @@ function App() {
   }
 
   const [newRating, setNewRating] = useState(initialRating);
+  const [inputError, setInputError] = useState([]);
 
   const calculation = () => {
+
+    //エラー検知
+    setInputError(inputError.splice(0))
+    var err = []
+
+    if(courseRatio[course] === undefined){err.push("コースが不正です")}
+    if(allowance.length === 0){err.push("牝馬斤量差が入力されていません")}
+    if(isNaN(Number(allowance))){err.push("牝馬斤量差が不正です")}
+    
+    if(inputHorse1.prerating.length === 0){err.push("1 着のプレレーティングが入力されていません")}
+    if(inputHorse2.prerating.length === 0){err.push("2 着のプレレーティングが入力されていません")}
+    if(inputHorse3.prerating.length === 0){err.push("3 着のプレレーティングが入力されていません")}
+    if(inputHorse4.prerating.length === 0){err.push("4 着のプレレーティングが入力されていません")}
+    if(inputHorse5.prerating.length === 0){err.push("5 着のプレレーティングが入力されていません")}
+
+    if(isNaN(Number(inputHorse1.prerating))){err.push("1 着のプレレーティングが不正です")}
+    if(isNaN(Number(inputHorse2.prerating))){err.push("2 着のプレレーティングが不正です")}
+    if(isNaN(Number(inputHorse3.prerating))){err.push("3 着のプレレーティングが不正です")}
+    if(isNaN(Number(inputHorse4.prerating))){err.push("4 着のプレレーティングが不正です")}
+    if(isNaN(Number(inputHorse5.prerating))){err.push("5 着のプレレーティングが不正です")}
+
+    if(inputHorse2.margin === undefined || Number(inputHorse2.margin) < 0){err.push("1 着と 2 着の着差が入力されていません")}
+    if(inputHorse3.margin === undefined || Number(inputHorse3.margin) < 0){err.push("2 着と 3 着の着差が入力されていません")}
+    if(inputHorse4.margin === undefined || Number(inputHorse4.margin) < 0){err.push("3 着と 4 着の着差が入力されていません")}
+    if(inputHorse5.margin === undefined || Number(inputHorse5.margin) < 0){err.push("4 着と 5 着の着差が入力されていません")}
+
+    setInputError(err)
+
+    if(err.length !== 0){
+      return;
+    }
+    //エラーなし
 
     var distance = Array(size);
     
@@ -131,6 +164,9 @@ function App() {
         setHorses = {[
           setInputHorse1,setInputHorse2,setInputHorse3,setInputHorse4,setInputHorse5
         ]}
+      />
+      <OutputError
+        error = {inputError}
       />
       <OutputResult
         size = {size}

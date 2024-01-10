@@ -6,6 +6,26 @@ export function ShowData({data,color}){
     );
 };
 
+export function OutputError({error}){
+
+    if(error.length===0){
+        return;
+    }else{
+
+        var err = ''
+        for(var i=0;i<error.length;i++){
+            err = err + "エラー: " + error[i] + "\n"
+        }
+        
+        return(
+            <div className="ShowData" style={{...styles.showData, color:"red"}}>
+                {err}
+            </div>
+        );
+    }
+
+}
+
 export function OutputResult({size, horses, rating}){
 
     return(
@@ -98,6 +118,7 @@ const styles = {
         fontWeight: "bold",
         border: "solid 1.5px #000",
         backgroundColor: '#eee',
+        whiteSpace: 'pre-line',
     },
     outputResult: {
         flexDirection: 'row',

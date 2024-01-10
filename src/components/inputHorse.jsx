@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React /*, { useState }*/ from "react";
 
 export function InputResult({size, setSize, allowance, setAllowance, course, setCourse, horses, setHorses, calculation}){
     return(
